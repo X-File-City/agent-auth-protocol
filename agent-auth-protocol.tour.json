@@ -1,0 +1,290 @@
+{
+  "id": "agent-auth-protocol-onboarding",
+  "title": "Agent Auth Protocol - Codebase Tour",
+  "description": "A guided walkthrough of the Agent Auth Protocol website, covering the Next.js app structure, interactive demo, documentation system, API routes, and core libraries.",
+  "version": "1.0.0",
+  "audience": "New Contributors & Engineers",
+  "prerequisites": [
+    "Familiarity with Next.js App Router",
+    "Basic understanding of TypeScript and React"
+  ],
+  "steps": [
+    {
+      "id": "step-1-overview",
+      "title": "Project Overview",
+      "description": "Welcome to the Agent Auth Protocol codebase! This is a Next.js website that serves as the home for the Agent Auth Protocol — an open standard for AI agent authentication, capability-based authorization, and service discovery. The project includes a landing page, interactive demo, full documentation hub, and a versioned specification viewer. Let's explore how it all fits together.",
+      "estimatedTime": 60,
+      "colorMode": "fileTypes"
+    },
+    {
+      "id": "step-2-app-router",
+      "title": "Next.js App Router & Pages",
+      "description": "The app/ directory uses Next.js App Router with route groups. The root page.tsx is the landing page. The (docs) route group wraps the documentation layout, demo page, specification viewer, and provider directory. Each route has its own page component that composes from the components/ directory.",
+      "estimatedTime": 90,
+      "focusDirectory": "app",
+      "highlightLayers": [
+        {
+          "id": "pages-layer",
+          "name": "Page Entry Points",
+          "color": "#3b82f6",
+          "items": [
+            { "path": "app/page.tsx", "type": "file" },
+            { "path": "app/layout.tsx", "type": "file" }
+          ],
+          "opacity": 0.7,
+          "renderStrategy": "fill"
+        },
+        {
+          "id": "route-groups",
+          "name": "Route Groups",
+          "color": "#8b5cf6",
+          "items": [
+            { "path": "app/(docs)", "type": "directory" }
+          ],
+          "opacity": 0.5,
+          "renderStrategy": "border"
+        }
+      ],
+      "colorMode": "fileTypes",
+      "interactiveActions": [
+        {
+          "type": "click-file",
+          "description": "Click on page.tsx to see the landing page entry point",
+          "target": "app/page.tsx"
+        }
+      ]
+    },
+    {
+      "id": "step-3-api-routes",
+      "title": "API Routes — Chat, Demo & Search",
+      "description": "The API layer powers the interactive features. The /api/chat endpoint handles AI-powered documentation search using Vercel AI SDK and OpenRouter. The /api/demo/chat endpoint drives the interactive demo with full tool calling (connect_agent, execute_capability, request_capability). The /api/search endpoint provides full-text search via Orama. There are also /api/llms.txt routes that expose content for LLM consumption.",
+      "estimatedTime": 120,
+      "focusDirectory": "app/api",
+      "highlightLayers": [
+        {
+          "id": "demo-api",
+          "name": "Demo API",
+          "color": "#f59e0b",
+          "items": [
+            { "path": "app/api/demo", "type": "directory" }
+          ],
+          "opacity": 0.7,
+          "renderStrategy": "border"
+        },
+        {
+          "id": "docs-api",
+          "name": "Docs Search API",
+          "color": "#10b981",
+          "items": [
+            { "path": "app/api/chat", "type": "directory" },
+            { "path": "app/api/search", "type": "directory" }
+          ],
+          "opacity": 0.7,
+          "renderStrategy": "border"
+        }
+      ],
+      "colorMode": "fileTypes",
+      "interactiveActions": [
+        {
+          "type": "hover-directory",
+          "description": "Hover over the demo/ directory to see the chat and status endpoints",
+          "target": "app/api/demo"
+        }
+      ]
+    },
+    {
+      "id": "step-4-components",
+      "title": "Component Architecture",
+      "description": "Components are organized by feature domain. The demo/ folder contains the interactive demo UI (interactive-demo.tsx is 1000+ lines handling chat, sidebar, protocol phases, and tool call visualization). The landing/ folder has the homepage sections. The docs/ folder has documentation navigation (sidebar, topnav, TOC). The ui/ folder contains shadcn/ui base components. The spec/ folder has the specification reader and version selector.",
+      "estimatedTime": 120,
+      "focusDirectory": "components",
+      "highlightLayers": [
+        {
+          "id": "demo-components",
+          "name": "Interactive Demo",
+          "color": "#ef4444",
+          "items": [
+            { "path": "components/demo", "type": "directory" }
+          ],
+          "opacity": 0.6,
+          "renderStrategy": "border"
+        },
+        {
+          "id": "landing-components",
+          "name": "Landing Page",
+          "color": "#3b82f6",
+          "items": [
+            { "path": "components/landing", "type": "directory" }
+          ],
+          "opacity": 0.6,
+          "renderStrategy": "border"
+        },
+        {
+          "id": "docs-components",
+          "name": "Documentation UI",
+          "color": "#10b981",
+          "items": [
+            { "path": "components/docs", "type": "directory" },
+            { "path": "components/spec", "type": "directory" }
+          ],
+          "opacity": 0.6,
+          "renderStrategy": "border"
+        },
+        {
+          "id": "base-ui",
+          "name": "Base UI (shadcn)",
+          "color": "#6b7280",
+          "items": [
+            { "path": "components/ui", "type": "directory" }
+          ],
+          "opacity": 0.4,
+          "renderStrategy": "border"
+        }
+      ],
+      "colorMode": "fileTypes",
+      "interactiveActions": [
+        {
+          "type": "click-file",
+          "description": "Click interactive-demo.tsx — the heart of the demo experience",
+          "target": "components/demo/interactive-demo.tsx"
+        }
+      ]
+    },
+    {
+      "id": "step-5-lib",
+      "title": "Core Libraries & Utilities",
+      "description": "The lib/ directory contains the business logic that powers the site. lib/ai/server.ts handles LLM chat integration for docs search. lib/demo/sessions.ts manages per-user demo sessions with TTL and approval tracking. lib/demo/rate-limit.ts provides rate limiting via Upstash Redis. lib/spec.ts processes the specification MDX, generates table of contents, and converts section references (like §5.3) into anchor links. lib/docs.ts defines the documentation navigation structure.",
+      "estimatedTime": 90,
+      "focusDirectory": "lib",
+      "highlightLayers": [
+        {
+          "id": "ai-lib",
+          "name": "AI Integration",
+          "color": "#8b5cf6",
+          "items": [
+            { "path": "lib/ai", "type": "directory" }
+          ],
+          "opacity": 0.7,
+          "renderStrategy": "border"
+        },
+        {
+          "id": "demo-lib",
+          "name": "Demo Session & Rate Limiting",
+          "color": "#f59e0b",
+          "items": [
+            { "path": "lib/demo", "type": "directory" }
+          ],
+          "opacity": 0.7,
+          "renderStrategy": "border"
+        },
+        {
+          "id": "spec-lib",
+          "name": "Spec & Docs Processing",
+          "color": "#10b981",
+          "items": [
+            { "path": "lib/spec.ts", "type": "file" },
+            { "path": "lib/docs.ts", "type": "file" },
+            { "path": "lib/source.ts", "type": "file" }
+          ],
+          "opacity": 0.7,
+          "renderStrategy": "fill"
+        }
+      ],
+      "colorMode": "fileTypes",
+      "interactiveActions": [
+        {
+          "type": "click-file",
+          "description": "Click sessions.ts to see how demo sessions are managed",
+          "target": "lib/demo/sessions.ts"
+        }
+      ]
+    },
+    {
+      "id": "step-6-content",
+      "title": "Documentation & Specification Content",
+      "description": "The content/ directory holds all the MDX documentation and the protocol specification. content/docs/ contains ~20 MDX files covering topics from introduction and authentication to security, data models, and MCP integration. content/specification/ has the full v1.0-draft specification (169KB). These MDX files are processed by Fumadocs and rendered through the docs layout with auto-generated table of contents and AI-powered search.",
+      "estimatedTime": 90,
+      "focusDirectory": "content",
+      "highlightLayers": [
+        {
+          "id": "docs-content",
+          "name": "Documentation Pages",
+          "color": "#3b82f6",
+          "items": [
+            { "path": "content/docs", "type": "directory" }
+          ],
+          "opacity": 0.6,
+          "renderStrategy": "border"
+        },
+        {
+          "id": "spec-content",
+          "name": "Protocol Specification",
+          "color": "#ef4444",
+          "items": [
+            { "path": "content/specification", "type": "directory" }
+          ],
+          "opacity": 0.7,
+          "renderStrategy": "border"
+        }
+      ],
+      "colorMode": "fileTypes",
+      "interactiveActions": [
+        {
+          "type": "hover-directory",
+          "description": "Hover over docs/ to see all documentation topics",
+          "target": "content/docs"
+        }
+      ]
+    },
+    {
+      "id": "step-7-config",
+      "title": "Configuration & Infrastructure",
+      "description": "The project configuration ties everything together. next.config.ts sets up MDX processing via Fumadocs. source.config.ts configures the documentation sources. components.json defines shadcn/ui settings. vercel.json handles deployment configuration. The TypeScript, Tailwind, and PostCSS configs round out the build toolchain.",
+      "estimatedTime": 60,
+      "focusDirectory": "",
+      "highlightLayers": [
+        {
+          "id": "config-files",
+          "name": "Configuration",
+          "color": "#f59e0b",
+          "items": [
+            { "path": "package.json", "type": "file" },
+            { "path": "next.config.ts", "type": "file" },
+            { "path": "tsconfig.json", "type": "file" },
+            { "path": "source.config.ts", "type": "file" },
+            { "path": "components.json", "type": "file" },
+            { "path": "vercel.json", "type": "file" },
+            { "path": "postcss.config.mjs", "type": "file" }
+          ],
+          "opacity": 0.7,
+          "renderStrategy": "fill"
+        }
+      ],
+      "colorMode": "fileTypes"
+    },
+    {
+      "id": "step-8-full-picture",
+      "title": "The Full Picture",
+      "description": "You've now seen all the major areas of the Agent Auth Protocol codebase. To recap: the app/ directory defines routes and API endpoints, components/ provides the UI layer organized by feature, lib/ contains the core logic for AI integration and session management, and content/ holds the documentation and specification. The project serves as both a marketing site and a comprehensive developer resource for the Agent Auth Protocol. Happy exploring!",
+      "estimatedTime": 60,
+      "focusDirectory": "",
+      "colorMode": "fileTypes",
+      "interactiveActions": [
+        {
+          "type": "explore",
+          "description": "Freely explore the codebase — click on any building to dive deeper"
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "author": "Claude",
+    "createdAt": "2026-03-19",
+    "tags": [
+      "onboarding",
+      "next-js",
+      "agent-auth",
+      "architecture"
+    ]
+  }
+}
