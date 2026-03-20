@@ -19,7 +19,7 @@
     {
       "id": "step-2-app-router",
       "title": "Next.js App Router & Pages",
-      "description": "The app/ directory uses Next.js App Router with route groups. The root page.tsx is the landing page. The (docs) route group wraps the documentation layout, demo page, specification viewer, and provider directory. Each route has its own page component that composes from the components/ directory.",
+      "description": "The app/ directory uses Next.js App Router with route groups. The root page.tsx is the landing page, and the (docs) group wraps the docs, demo, spec viewer, and directory pages.",
       "estimatedTime": 90,
       "focusDirectory": "app",
       "highlightLayers": [
@@ -57,7 +57,7 @@
     {
       "id": "step-3-api-routes",
       "title": "API Routes — Chat, Demo & Search",
-      "description": "The API layer powers the interactive features. The /api/chat endpoint handles AI-powered documentation search using Vercel AI SDK and OpenRouter. The /api/demo/chat endpoint drives the interactive demo with full tool calling (connect_agent, execute_capability, request_capability). The /api/search endpoint provides full-text search via Orama. There are also /api/llms.txt routes that expose content for LLM consumption.",
+      "description": "The API layer powers the interactive features. /api/chat handles AI-powered doc search, /api/demo/chat drives the interactive demo with tool calling, and /api/search provides full-text search via Orama.",
       "estimatedTime": 120,
       "focusDirectory": "app/api",
       "highlightLayers": [
@@ -95,7 +95,7 @@
     {
       "id": "step-4-components",
       "title": "Component Architecture",
-      "description": "Components are organized by feature domain. The demo/ folder contains the interactive demo UI (interactive-demo.tsx is 1000+ lines handling chat, sidebar, protocol phases, and tool call visualization). The landing/ folder has the homepage sections. The docs/ folder has documentation navigation (sidebar, topnav, TOC). The ui/ folder contains shadcn/ui base components. The spec/ folder has the specification reader and version selector.",
+      "description": "Components are organized by feature: demo/ has the interactive demo UI, landing/ the homepage, docs/ and spec/ the documentation navigation, and ui/ the shadcn/ui base components.",
       "estimatedTime": 120,
       "focusDirectory": "components",
       "highlightLayers": [
@@ -153,7 +153,7 @@
     {
       "id": "step-5-lib",
       "title": "Core Libraries & Utilities",
-      "description": "The lib/ directory contains the business logic that powers the site. lib/ai/server.ts handles LLM chat integration for docs search. lib/demo/sessions.ts manages per-user demo sessions with TTL and approval tracking. lib/demo/rate-limit.ts provides rate limiting via Upstash Redis. lib/spec.ts processes the specification MDX, generates table of contents, and converts section references (like §5.3) into anchor links. lib/docs.ts defines the documentation navigation structure.",
+      "description": "The lib/ directory holds business logic: AI chat integration (lib/ai/), demo session management and rate limiting (lib/demo/), and specification/docs processing (lib/spec.ts, lib/docs.ts).",
       "estimatedTime": 90,
       "focusDirectory": "lib",
       "highlightLayers": [
@@ -202,7 +202,7 @@
     {
       "id": "step-6-content",
       "title": "Documentation & Specification Content",
-      "description": "The content/ directory holds all the MDX documentation and the protocol specification. content/docs/ contains ~20 MDX files covering topics from introduction and authentication to security, data models, and MCP integration. content/specification/ has the full v1.0-draft specification (169KB). These MDX files are processed by Fumadocs and rendered through the docs layout with auto-generated table of contents and AI-powered search.",
+      "description": "The content/ directory holds all MDX documentation (~20 guides) and the full v1.0-draft protocol specification. Processed by Fumadocs with auto-generated TOC and AI-powered search.",
       "estimatedTime": 90,
       "focusDirectory": "content",
       "highlightLayers": [
@@ -239,7 +239,7 @@
     {
       "id": "step-7-config",
       "title": "Configuration & Infrastructure",
-      "description": "The project configuration ties everything together. next.config.ts sets up MDX processing via Fumadocs. source.config.ts configures the documentation sources. components.json defines shadcn/ui settings. vercel.json handles deployment configuration. The TypeScript, Tailwind, and PostCSS configs round out the build toolchain.",
+      "description": "Key config files: next.config.ts (MDX/Fumadocs), source.config.ts (doc sources), components.json (shadcn/ui), vercel.json (deployment), plus TypeScript, Tailwind, and PostCSS.",
       "estimatedTime": 60,
       "focusDirectory": "",
       "highlightLayers": [
