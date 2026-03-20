@@ -153,7 +153,7 @@
     {
       "id": "step-5-lib",
       "title": "Core Libraries & Utilities",
-      "description": "The lib/ directory holds business logic: AI chat integration (lib/ai/), demo session management and rate limiting (lib/demo/), and specification/docs processing (lib/spec.ts, lib/docs.ts).",
+      "description": "The lib/ directory holds business logic: AI chat integration, demo session management and rate limiting, and specification/docs processing.",
       "estimatedTime": 90,
       "focusDirectory": "lib",
       "highlightLayers": [
@@ -202,7 +202,7 @@
     {
       "id": "step-6-content",
       "title": "Documentation & Specification Content",
-      "description": "The content/ directory holds all MDX documentation (~20 guides) and the full v1.0-draft protocol specification. Processed by Fumadocs with auto-generated TOC and AI-powered search.",
+      "description": "The content/ directory holds all MDX documentation (20 guides) and the full v1.0-draft protocol specification. Processed by Fumadocs with auto-generated TOC and AI-powered search.",
       "estimatedTime": 90,
       "focusDirectory": "content",
       "highlightLayers": [
